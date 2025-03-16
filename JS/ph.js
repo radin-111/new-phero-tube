@@ -4,6 +4,7 @@ function loadNav() {
         .then(data => showNav(data))
 }
 const loadDetails = (id) => {
+    console.log(id)
     const url = `https://openapi.programming-hero.com/api/phero-tube/video/${id}`;
     fetch(url)
         .then(response => response.json())
@@ -29,32 +30,33 @@ const loadDetails = (id) => {
 //     "description": "'Smells Like Teen Spirit' by Oliver Harris captures the raw energy and rebellious spirit of youth. With over 5.4K views, this track brings a grunge rock vibe, featuring powerful guitar riffs and compelling vocals. Oliver's verified profile guarantees a quality musical journey that resonates with fans of dynamic, high-energy performances."
 // }
 let showDetails = (details) => {
-    console.log(details)
+    console.log(details.video)
+    
     const modal = document.getElementById("my_modal_3");
-    // modal.innerHTML=`
-    // <dialog id="my_modal_3" class="modal">
-    //     <div class="modal-box">
+    modal.innerHTML=`
+    
+        <div class="modal-box">
 
-    //         <form method="dialog">
-    //             <button id="btn"
-    //                 class="btn hover:bg-[#FF1F3D] hover:text-white  btn-sm btn-circle btn-ghost absolute right-2 top-2 ">✕</button>
-    //         </form>
-    //         <div class="card bg-base-100 m-4 w-96 image-full  shadow-sm">
-    //             <figure>
-    //                 <img src="${details.thumbnail}"
-    //                     alt="Shoes" />
-    //             </figure>
-    //             <div class="card-body">
-    //                 <h2 class="card-title">${details.title}</h2>
-    //                 <p>A card component has a figure, a body part, and inside body there are title and actions parts
-    //                 </p>
-    //                 <div class="card-actions justify-end">
+            <form method="dialog">
+                <button id="btn"
+                    class="btn hover:bg-[#FF1F3D] hover:text-white  btn-sm btn-circle btn-ghost absolute right-2 top-2 ">✕</button>
+            </form>
+            <div class="card bg-base-100 m-4 w-96 image-full  shadow-sm">
+                <figure>
+                    <img src="${details.video.thumbnail}"
+                        alt="Shoes" />
+                </figure>
+                <div class="card-body">
+                    <h2 class="card-title">${details.video.title}</h2>
+                    <p>${details.video.description}
+                    </p>
+                    <div class="card-actions justify-end">
 
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     </div>
-    // </dialog>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
     
     
     // `
