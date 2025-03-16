@@ -99,6 +99,7 @@ function showNav(navd) {
 
 }
 function loadVideo() {
+    showLoader();
     fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
         .then(ii => ii.json())
         .then(data => showVideo(data.videos))
@@ -106,6 +107,7 @@ function loadVideo() {
 const loadCatV = (id) => {
     const url = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`
     // console.log(url)
+    showLoader();
     fetch(url)
         .then(res => res.json())
         .then(data => {
@@ -130,6 +132,7 @@ function showVideo(videos) {
                 Oops!! Sorry, There is no content here
             </h2>
         </div>`;
+        removeLoader();
         return;
     }
 
@@ -177,6 +180,7 @@ function showVideo(videos) {
 
 
     })
+    removeLoader();
 
         ;
 }
@@ -189,6 +193,14 @@ function loadTilte(search) {
     fetch(url)
         .then(res => res.json())
         .then(data => showVideo(data.videos))
+}
+function showLoader(){
+    document.getElementById("loader").classList.remove("hidden");
+    document.getElementById("video-container").classList.add("hidden");
+}
+function removeLoader(){
+    document.getElementById("loader").classList.add("hidden");
+    document.getElementById("video-container").classList.remove("hidden");
 }
 // dddd();
 loadNav();
