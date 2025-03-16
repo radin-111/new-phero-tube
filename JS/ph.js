@@ -31,17 +31,17 @@ const loadDetails = (id) => {
 // }
 let showDetails = (details) => {
     console.log(details.video)
-    
+
     const modal = document.getElementById("my_modal_3");
-    modal.innerHTML=`
+    modal.innerHTML = `
     
         <div class="modal-box">
 
             <form method="dialog">
                 <button id="btn"
-                    class="btn hover:bg-[#FF1F3D] hover:text-white  btn-sm btn-circle btn-ghost absolute right-2 top-2 ">✕</button>
+                    class="btn hover:bg-[#FF1F3D] hover:text-white  btn-sm btn-circle btn-ghost absolute  right-2 top-2 ">✕</button>
             </form>
-            <div class="card bg-base-100 m-4 w-96 image-full  shadow-sm">
+            <div class="card bg-base-100 m-2 sm:m-4 w-3/4 sm:w-96 image-full  shadow-sm">
                 <figure>
                     <img src="${details.video.thumbnail}"
                         alt="Shoes" />
@@ -61,7 +61,7 @@ let showDetails = (details) => {
     
     // `
     modal.showModal();
-    
+
 
 }
 
@@ -156,9 +156,9 @@ function showVideo(videos) {
                 </div>
                 <div class="card-body">
                     
-                    <p class="font-semibold text-sm">A card component has a figure, a body part, and inside body there are title and actions parts</p>
+                    <p class="font-semibold text-sm">${video.title}</p>
                     
-                    <p class="text-gray-600 font-semibold flex gap-4 items-center justify-start">${video.authors[0].profile_name}<img src="https://img.icons8.com/?size=48&id=98A4yZTt9abw&format=png" class="w-5 h-5" alt=""></p>
+                    <p class="text-gray-600 font-semibold flex gap-4 items-center justify-start">${video.authors[0].profile_name}${video.authors[0].verified == true ? `<img src="https://img.icons8.com/?size=48&id=98A4yZTt9abw&format=png" class="w-5 h-5" alt="">` : ``}</p>
                     <p class="text-gray-600 font-semibold">${video.others.views} views
 
                     </p>
@@ -180,7 +180,16 @@ function showVideo(videos) {
 
         ;
 }
-
+document.getElementById("search-input").addEventListener("keyup", (r) => {
+    const input = r.target.value;
+    loadTilte(input);
+})
+function loadTilte(search) {
+    const url = `https://openapi.programming-hero.com/api/phero-tube/videos?title=${search}`
+    fetch(url)
+        .then(res => res.json())
+        .then(data => showVideo(data.videos))
+}
 // dddd();
 loadNav();
 loadVideo();
